@@ -348,14 +348,3 @@ Le choix d’un **LLM cloud (Azure OpenAI)** permet :
 ✅ Valeur immédiate
 
 > 🎯 Focus = intégration & logique métier, pas entraînement ML
-
----
-
-# ✅ FIN DU README
-
-Souhaites-tu :
-✅ Un pitch 3 min ?
-✅ Un schéma haut niveau PNG ?
-✅ Un starter code pour backend ?
-
-Je peux fournir la suite.
