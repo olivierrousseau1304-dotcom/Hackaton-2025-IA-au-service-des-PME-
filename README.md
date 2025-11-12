@@ -1,81 +1,83 @@
-README FINAL
-POC — Hackathon CodeForSud x Microsoft @ IMREDD
+README 
+> **POC — Hackathon CodeForSud x Microsoft @ IMREDD**
 
-1) 🎯 Contexte
+## 1) 🎯 Contexte
 
 Les PME font face à une augmentation considérable de demandes clients quotidiennes, sur plusieurs canaux :
 📩 Email — 💬 SMS — 📞 Téléphone
 
 Ce traitement manuel mobilise des équipes qualifiées sur des demandes simples et récurrentes, génère des délais et dégrade l'expérience client.
 
-Constat (cas type) : 
+**Constat (cas type) :** 
 
-Automatisation-intelligente-du-…
+* **300+ tickets / jour**
+* **8 minutes par ticket**
+* Jusqu’à **60% automatisables**
 
-300+ tickets / jour
+=> Environ **1 à 3 ETP mobilisés** à faible valeur ajoutée
 
-8 minutes par ticket
+> 💡 **Opportunité :**
+> Automatiser le traitement des tickets simples pour :
+> ✅ Accélérer les délais
+> ✅ Réduire les coûts
+> ✅ Améliorer la satisfaction client
+> ✅ Libérer des agents humains pour les cas complexes
 
-Jusqu’à 60% automatisables
+---
 
-=> Environ 1 à 3 ETP mobilisés à faible valeur ajoutée
+## 2) ❗ Problématique
 
-💡 Opportunité :
-Automatiser le traitement des tickets simples pour :
-✅ Accélérer les délais
-✅ Réduire les coûts
-✅ Améliorer la satisfaction client
-✅ Libérer des agents humains pour les cas complexes
+> 🔥 **Comment automatiser intelligemment le traitement des demandes simples afin d’améliorer l’efficacité tout en garantissant des réponses fiables et contextualisées ?**
 
-2) ❗ Problématique
+---
 
-🔥 Comment automatiser intelligemment le traitement des demandes simples afin d’améliorer l’efficacité tout en garantissant des réponses fiables et contextualisées ?
+## 3) 🌐 Vision
 
-3) 🌐 Vision
-
-« Vers un service Tiers 1 augmenté par l’IA »
+> « Vers un service Tiers 1 augmenté par l’IA »
 
 Une orchestration intelligente qui :
 
-Capture les messages multi-canal
+* Capture les messages multi-canal
+* Analyse automatiquement contenu & intention
+* Priorise
+* Génère des réponses adaptées
+* Escalade les cas complexes
 
-Analyse automatiquement contenu & intention
+---
 
-Priorise
+## 4) ✅ Objectif du POC
 
-Génère des réponses adaptées
-
-Escalade les cas complexes
-
-4) ✅ Objectif du POC
-
-Démontrer en 3 jours la faisabilité d’un assistant IA capable de traiter automatiquement les demandes simples et d’escalader les complexes.
+> **Démontrer en 3 jours la faisabilité d’un assistant IA capable de traiter automatiquement les demandes simples et d’escalader les complexes.**
 
 Focus MVP :
 
-Message entrant (mock)
+1. Message entrant (mock)
+2. Analyse IA → résumé + catégorie + priorité
+3. Décision → auto-réponse / escalade
+4. Réponse générée
+5. Historisation → dashboard
 
-Analyse IA → résumé + catégorie + priorité
+---
 
-Décision → auto-réponse / escalade
+## 5) 🔎 Approche POC vs Produit final
 
-Réponse générée
+| Fonction             | **POC (3 jours)** | Produit futur           |
+| -------------------- | ----------------- | ----------------------- |
+| Ingestion multicanal | Mock JSON         | Email / SMS / Téléphone |
+| Classification IA    | ✅                 | ✅ Fine-tuning           |
+| Vectorisation        | Mini FAQ          | Full historique tickets |
+| Orchestration        | Simple            | + ITSM + logistique     |
+| Réponse              | Génération simple | Personnalisation        |
+| Dashboard            | Basique           | + Analytics avancées    |
+| SLA                  | ❌                 | ✅                       |
 
-Historisation → dashboard
+⚠️ Dans ce hackathon → **POC ciblé**, pas produit industriel.
 
-5) 🔎 Approche POC vs Produit final
-Fonction	POC (3 jours)	Produit futur
-Ingestion multicanal	Mock JSON	Email / SMS / Téléphone
-Classification IA	✅	✅ Fine-tuning
-Vectorisation	Mini FAQ	Full historique tickets
-Orchestration	Simple	+ ITSM + logistique
-Réponse	Génération simple	Personnalisation
-Dashboard	Basique	+ Analytics avancées
-SLA	❌	✅
+---
 
-⚠️ Dans ce hackathon → POC ciblé, pas produit industriel.
+## 6) 🧱 Architecture — MVP
 
-6) 🧱 Architecture — MVP
+```
    [Entrée message]
          │
          ▼
@@ -99,27 +101,41 @@ SLA	❌	✅
          │
          ▼
      Dashboard Web
+```
 
-7) 🤖 Pipeline Agents
-Agent	Rôle
-Ingestion Agent	Reçoit le message → uniformise
-LLM Agent	Analyse + résume + classifie
-Routing Agent	Décide action
-Output Agent	Gère réponse / ticket
-Dashboard Agent	Affiche traitement
-8) 🧰 Outils
-Besoin	Outil
-Modèle IA	Azure OpenAI
-Orchestration	Azure Logic Apps
-Backend API	Azure Functions / Python
-Front	React / Next.js
-DB mock	JSON / SQLite
-Versioning	GitHub
-Pitch	PowerPoint / Figma
+---
+
+## 7) 🤖 Pipeline Agents
+
+| Agent           | Rôle                           |
+| --------------- | ------------------------------ |
+| Ingestion Agent | Reçoit le message → uniformise |
+| LLM Agent       | Analyse + résume + classifie   |
+| Routing Agent   | Décide action                  |
+| Output Agent    | Gère réponse / ticket          |
+| Dashboard Agent | Affiche traitement             |
+
+---
+
+## 8) 🧰 Outils
+
+| Besoin        | Outil                    |
+| ------------- | ------------------------ |
+| Modèle IA     | Azure OpenAI             |
+| Orchestration | Azure Logic Apps         |
+| Backend API   | Azure Functions / Python |
+| Front         | React / Next.js          |
+| DB mock       | JSON / SQLite            |
+| Versioning    | GitHub                   |
+| Pitch         | PowerPoint / Figma       |
 
 → Tous gratuits ou avec crédits
 
-9) 📁 Structure projet
+---
+
+## 9) 📁 Structure projet
+
+```
 /backend
   app.py
   services/
@@ -138,78 +154,82 @@ Pitch	PowerPoint / Figma
    pitch.md
 
  README.md
+```
 
-10) 👥 Équipe (5)
-Rôle	Mission
-Backend	API + logique
-IA / Prompting	Analyse + décision
-Frontend	Dashboard
-Intégration	Azure Logic Apps
-Pitch / UX	Storytelling + démo
-11) 📅 Planning — 3 jours
-✅ J1 — Analyse + IA
+---
 
-Comprendre POC
+## 10) 👥 Équipe (5)
 
-Créer prompts
+| Rôle           | Mission             |
+| -------------- | ------------------- |
+| Backend        | API + logique       |
+| IA / Prompting | Analyse + décision  |
+| Frontend       | Dashboard           |
+| Intégration    | Azure Logic Apps    |
+| Pitch / UX     | Storytelling + démo |
 
-LLM → JSON
+---
 
-Mock messages
+## 11) 📅 Planning — 3 jours
 
-Sketch UI
+### ✅ J1 — Analyse + IA
 
-🎯 LIVRABLE :
-Message → JSON enrichi
+* Comprendre POC
+* Créer prompts
+* LLM → JSON
+* Mock messages
+* Sketch UI
 
-✅ J2 — Produit
+> 🎯 LIVRABLE :
+> Message → JSON enrichi
 
-Backend API
+---
 
-Dashboard
+### ✅ J2 — Produit
 
-Routing auto / escalade
+* Backend API
+* Dashboard
+* Routing auto / escalade
+* DB tickets
 
-DB tickets
+> 🎯 LIVRABLE :
+> Message → réponse / ticket
 
-🎯 LIVRABLE :
-Message → réponse / ticket
+---
 
-✅ J3 — Polish + Pitch
+### ✅ J3 — Polish + Pitch
 
-UI clean
+* UI clean
+* KPI
+* Pitch
+* Démo fluide
 
-KPI
+> 🎯 LIVRABLE :
+> Démo complète + slides
 
-Pitch
+---
 
-Démo fluide
+## 12) 🎛️ KPI
 
-🎯 LIVRABLE :
-Démo complète + slides
+* % auto-traités
+* Temps moyen
+* % escalade
+* Satisfaction simulée
 
-12) 🎛️ KPI
+---
 
-% auto-traités
+## 13) 💼 Business value
 
-Temps moyen
+➡ **60% d’automatisation**
+➡ **1,5–3 ETP gagnés**
+➡ **ROI < 3 mois**
 
-% escalade
+---
 
-Satisfaction simulée
+## 14) 🚀 Next steps (post-hackathon)
 
-13) 💼 Business value
+* Intégration ITSM
+* Vectorisation historique
+* Recherche sémantique avancée
+* Transcription vocale temps réel
 
-➡ 60% d’automatisation
-➡ 1,5–3 ETP gagnés
-➡ ROI < 3 mois
-
-14) 🚀 Next steps (post-hackathon)
-
-Intégration ITSM
-
-Vectorisation historique
-
-Recherche sémantique avancée
-
-Transcription vocale temps réel
