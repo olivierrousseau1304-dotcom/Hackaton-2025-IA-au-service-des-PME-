@@ -1,350 +1,215 @@
-Voici une **version finale du README**, enrichie avec les points pertinents apportés par ton ami (clarification des objectifs, logique de traitement des données, choix du modèle), mais **réécrite pour être adaptée au contexte réel du hackathon Azure / LLM / MVP**.
+README FINAL
+POC — Hackathon CodeForSud x Microsoft @ IMREDD
 
-> ✅ Professionnel
-> ✅ Clair pour toute l’équipe (non-experts IA compris)
-> ✅ Facile à suivre
-> ✅ Directement exploitable à copier sur GitHub
-> ✅ Organisation + tech + logique IA
+1) 🎯 Contexte
 
----
+Les PME font face à une augmentation considérable de demandes clients quotidiennes, sur plusieurs canaux :
+📩 Email — 💬 SMS — 📞 Téléphone
 
-# 🚀 Automatisation intelligente du support client
+Ce traitement manuel mobilise des équipes qualifiées sur des demandes simples et récurrentes, génère des délais et dégrade l'expérience client.
 
-### Hackathon CodeForSud x Microsoft — IMREDD
+Constat (cas type) : 
 
-> *Projet réalisé en 3 jours dans le cadre du thème : « L’IA au service des PME »*
+Automatisation-intelligente-du-…
 
----
+300+ tickets / jour
 
-# ✅ 1) Contexte
+8 minutes par ticket
 
-Les PME reçoivent chaque jour des dizaines à centaines de messages clients (email, formulaire, réseaux sociaux, SMS…).
-Une grande partie de ces requêtes sont **simples et répétitives** :
-→ questions produit, SAV basique, horaires, suivi de commande, facturation, etc.
+Jusqu’à 60% automatisables
 
-Ces tâches consomment en moyenne **~8 minutes par demande**,
-et certaines PME rapportent **>300 requêtes / jour**,
-soit l’équivalent **d’un employé à temps plein**.
+=> Environ 1 à 3 ETP mobilisés à faible valeur ajoutée
 
-Ce coût opérationnel freine la croissance et nuit à la satisfaction client.
+💡 Opportunité :
+Automatiser le traitement des tickets simples pour :
+✅ Accélérer les délais
+✅ Réduire les coûts
+✅ Améliorer la satisfaction client
+✅ Libérer des agents humains pour les cas complexes
 
----
+2) ❗ Problématique
 
-# ❗ 2) Problématique
+🔥 Comment automatiser intelligemment le traitement des demandes simples afin d’améliorer l’efficacité tout en garantissant des réponses fiables et contextualisées ?
 
-> 🔥 **Comment automatiser intelligemment le traitement des demandes clients afin de réduire le temps de réponse et limiter la surcharge des équipes ?**
+3) 🌐 Vision
 
----
+« Vers un service Tiers 1 augmenté par l’IA »
 
-# ✅ 3) Objectif du projet
+Une orchestration intelligente qui :
 
-Créer un assistant IA capable de :
+Capture les messages multi-canal
 
-1. **Centraliser** les messages entrants
-2. **Analyser & résumer** le contenu
-3. **Classifier** la demande (catégorie)
-4. **Prioriser** la demande (urgence)
-5. **Générer une réponse automatique** si possible
-6. **Escalader** vers un humain si nécessaire
-7. **Stocker & afficher** dans un dashboard simple
+Analyse automatiquement contenu & intention
 
-🎯 **Livrable attendu : un MVP fonctionnel et démontrable en 3 jours**
+Priorise
 
----
+Génère des réponses adaptées
 
-# ✅ 4) Ce que fait concrètement le modèle (BUT)
+Escalade les cas complexes
 
-Notre modèle doit :
+4) ✅ Objectif du POC
 
-* Identifier le type de demande (ex : info / SAV / remboursement)
-* Déduire son urgence
-* Proposer une réponse adaptée
-* Indiquer s’il faut répondre automatiquement ou escalader
-* Retourner ces éléments sous forme **JSON structurée**
+Démontrer en 3 jours la faisabilité d’un assistant IA capable de traiter automatiquement les demandes simples et d’escalader les complexes.
 
-> ➜ Le modèle ne cherche PAS à apprendre d’un dataset local
-> ➜ Il exploite un modèle LLM existant via prompting
+Focus MVP :
 
-Exemple output attendu :
+Message entrant (mock)
 
-```json
-{
-  "resume": "Le client demande un remboursement pour une commande.",
-  "categorie": "Remboursement",
-  "priorite": "Haute",
-  "reponse": "Bonjour, ...",
-  "action": "escalade"
-}
-```
+Analyse IA → résumé + catégorie + priorité
 
----
+Décision → auto-réponse / escalade
 
-# ✅ 5) Traitement des données — Logique
+Réponse générée
 
-Même si aucune phase d’entraînement n’est prévue, nous devons organiser les données de manière logique :
+Historisation → dashboard
 
-### Entrées :
+5) 🔎 Approche POC vs Produit final
+Fonction	POC (3 jours)	Produit futur
+Ingestion multicanal	Mock JSON	Email / SMS / Téléphone
+Classification IA	✅	✅ Fine-tuning
+Vectorisation	Mini FAQ	Full historique tickets
+Orchestration	Simple	+ ITSM + logistique
+Réponse	Génération simple	Personnalisation
+Dashboard	Basique	+ Analytics avancées
+SLA	❌	✅
 
-* texte du message (mock : JSON)
-* métadonnées (langue, canal, etc.)
+⚠️ Dans ce hackathon → POC ciblé, pas produit industriel.
 
-### Passage par :
+6) 🧱 Architecture — MVP
+   [Entrée message]
+         │
+         ▼
+   Ingestion (mock)
+         │
+         ▼
+ [Azure OpenAI LLM]
+  - Analyse
+  - Résumé
+  - Catégorie
+  - Priorité
+  - Décision
+  - Réponse
+         │
+   ┌─────┴──────────┐
+   ▼                ▼
+ Réponse auto     Escalade
+                     │
+                     ▼
+                   DB ticket
+         │
+         ▼
+     Dashboard Web
 
-* Normalisation → format simple
-* Prompting → Azure OpenAI
-* Résultat → JSON structuré
+7) 🤖 Pipeline Agents
+Agent	Rôle
+Ingestion Agent	Reçoit le message → uniformise
+LLM Agent	Analyse + résume + classifie
+Routing Agent	Décide action
+Output Agent	Gère réponse / ticket
+Dashboard Agent	Affiche traitement
+8) 🧰 Outils
+Besoin	Outil
+Modèle IA	Azure OpenAI
+Orchestration	Azure Logic Apps
+Backend API	Azure Functions / Python
+Front	React / Next.js
+DB mock	JSON / SQLite
+Versioning	GitHub
+Pitch	PowerPoint / Figma
 
-### Stockage :
+→ Tous gratuits ou avec crédits
 
-* système simple (JSON local / SQLite)
+9) 📁 Structure projet
+/backend
+  app.py
+  services/
+  prompts/
 
-### Utilisation :
-
-* Dashboard
-* Statut (réponse/équipe humaine)
-
-> ⚠️ Nous n’entraînons pas de modèle ML ou DL →
-> Nous faisons du **LLM Inference + Prompt Engineering**
-
----
-
-# ✅ 6) Pourquoi LLM plutôt que ML/DL local ?
-
-Ton ami avait raison de poser la question : « ML, DL ? Quel algo ? »,
-→ c’est normalement la bonne démarche en R&D.
-
-✅ MAIS
-Dans un **hackathon 3 jours**, avec Azure disponible, et une app orientée PME :
-📌 **ENTRAÎNER UN MODÈLE = inutile & perte de temps**
-
-Nous tirons parti de :
-✅ modèles existants (Azure OpenAI GPT-4o ou GPT-4o-mini)
-✅ prompting bien conçu
-✅ pipeline + produit + UX
-
-> ➜ La valeur ajoutée n’est pas dans l’entraînement ML
-> ➜ mais dans **l’intégration, l’UX, la logique métier, le routage**
-
-✅ Décision finale :
-
-> 👉 Utilisation d’un **LLM pré-entraîné (Azure OpenAI)** via API
-
----
-
-# ✅ 7) Stack & outils
-
-| Domaine         | Outil                           | Gratuit   |
-| --------------- | ------------------------------- | --------- |
-| IA              | Azure OpenAI Studio GPT-4o-mini | ✅ crédits |
-| Backend         | Python (FastAPI) ou Node.js     | ✅         |
-| Orchestration   | Azure Logic Apps                | ✅         |
-| UI              | React / Next.js                 | ✅         |
-| DB              | JSON local / SQLite             | ✅         |
-| IDE             | VSCode                          | ✅         |
-| Gestion tickets | Notion / Trello (mock)          | ✅         |
-| Stockage        | fichiers JSON / CosmosDB        | ✅         |
-| Documentation   | GitHub Wiki                     | ✅         |
-
-> 🔹 On favorise les outils simples & gratuits
-> 🔹 On évite les services compliqués à maintenir
-
----
-
-# ✅ 8) Architecture globale
-
-```
-Message client (mock)
-        │
-        ▼
-[1] Ingestion Layer
-(API / JSON)
-        │
-        ▼
-[2] Azure OpenAI (LLM)
-→ résumé
-→ catégorie
-→ priorité
-→ réponse
-→ action
-        │
-        ├─────────► Réponse auto
-        │
-        └─────────► Ticket DB
-                        │
-                        ▼
-                [3] Dashboard (React)
-```
-
----
-
-# ✅ 9) Pipeline Agents
-
-| Agent           | Rôle                              |
-| --------------- | --------------------------------- |
-| Ingestion Agent | Reçoit message, format JSON       |
-| LLM Agent       | Classification + action + réponse |
-| Routing Agent   | Exécution auto/escalade           |
-| Ticket Agent    | Stockage cas complexe             |
-| UI Agent        | Visualisation                     |
-
----
-
-# ✅ 10) Structure du repo
-
-```
-/root
-├─ backend/
-│   ├─ app.py
-│   ├─ services/
-│   ├─ prompts/
-│   └─ models/
-│
-├─ frontend/
-│   ├─ components/
-│   ├─ pages/
-│   └─ App.jsx
-│
-├─ data/
-│   ├─ tickets.json
-│   └─ samples.json
-│
-├─ docs/
-│   ├─ pipeline.png
-│   └─ pitch.md
-│
-└─ README.md
-```
+ /frontend
+   /pages
+   /components
 
----
+ /data
+   tickets.json
+   samples.json
 
-# ✅ 11) Organisation — 5 personnes
+ /docs
+   architecture.png
+   pitch.md
 
-| Rôle         | Missions                    |
-| ------------ | --------------------------- |
-| Backend      | API, routing, DB            |
-| IA Engineer  | Prompting + logique         |
-| Frontend     | Dashboard UI                |
-| Integrations | Azure Logic Apps            |
-| PM / Pitch   | Storytelling, tests, slides |
+ README.md
 
----
+10) 👥 Équipe (5)
+Rôle	Mission
+Backend	API + logique
+IA / Prompting	Analyse + décision
+Frontend	Dashboard
+Intégration	Azure Logic Apps
+Pitch / UX	Storytelling + démo
+11) 📅 Planning — 3 jours
+✅ J1 — Analyse + IA
 
-# ✅ 12) Plan de travail — 3 jours
+Comprendre POC
 
-### 🔹 Jour 1 — Foundations
+Créer prompts
 
-* Définir objectif
-* Créer prompt
-* Tester Azure OpenAI
-* API squelette
-* UI maquette
-* Mock data
+LLM → JSON
 
-**Milestone J1 :**
-✅ LLM → JSON OK
+Mock messages
 
----
+Sketch UI
 
-### 🔹 Jour 2 — Product
+🎯 LIVRABLE :
+Message → JSON enrichi
 
-* API → UI
-* Routing auto
-* Escalation (ticket)
-* DB JSON
+✅ J2 — Produit
 
-**Milestone J2 :**
-✅ Message → LLM → réponse → dashboard
+Backend API
 
----
+Dashboard
 
-### 🔹 Jour 3 — Polish + Pitch
+Routing auto / escalade
 
-* UX clean
-* Stats simples
-* Slides
-* Storytelling
+DB tickets
 
-**Milestone final :**
-✅ Démo fluide + Pitch prêt
+🎯 LIVRABLE :
+Message → réponse / ticket
 
----
+✅ J3 — Polish + Pitch
 
-# ✅ 13) Prompt LLM — Base
+UI clean
 
-```txt
-Tu es un assistant support client intelligent.
+KPI
 
-Rôle :
-Analyser le message suivant et retourner un JSON structuré.
+Pitch
 
-Message :
-{{message}}
+Démo fluide
 
-Retourne STRICTEMENT ce format :
-{
- "resume": "",
- "categorie": "",
- "priorite": "",
- "reponse": "",
- "action": "auto" | "escalade"
-}
-```
+🎯 LIVRABLE :
+Démo complète + slides
 
----
+12) 🎛️ KPI
 
-# ✅ 14) Bonus possibles
+% auto-traités
 
-* KPI : % auto-traité
-* Multilangue
-* Optimisation workflow
-* Feedback loop
+Temps moyen
 
----
+% escalade
 
-# ✅ 15) KPI à suivre
+Satisfaction simulée
 
-* Temps moyen traitement
-* % auto vs escalade
-* Satisfaction client (NPS future)
+13) 💼 Business value
 
----
+➡ 60% d’automatisation
+➡ 1,5–3 ETP gagnés
+➡ ROI < 3 mois
 
-# ✅ 16) Business Value
+14) 🚀 Next steps (post-hackathon)
 
-* Réduction coût support
-* Réponse instantanée
-* Scalabilité
-* AMÉLIORATION satisfaction
+Intégration ITSM
 
----
+Vectorisation historique
 
-# ✅ 17) Business Model
+Recherche sémantique avancée
 
-> SaaS PME
-
-3 paliers :
-
-* Basic
-* Pro
-* Enterprise
-
----
-
-# ✅ 18) Next Steps Post-Hackathon
-
-* Connecteurs CRM
-* WhatsApp / SMS
-* SSO & logs
-
----
-
-# 🎉 Conclusion
-
-Ce projet vise à **automatiser intelligemment** une activité chronophage des PME — le support client.
-
-Le choix d’un **LLM cloud (Azure OpenAI)** permet :
-✅ MVP rapide
-✅ Intégration simple
-✅ Valeur immédiate
-
-> 🎯 Focus = intégration & logique métier, pas entraînement ML
+Transcription vocale temps réel
