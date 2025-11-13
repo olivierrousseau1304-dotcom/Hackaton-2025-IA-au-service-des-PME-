@@ -917,7 +917,6 @@ select {
 
 /* ADMIN PAGE */
 .admin-page {
-  padding: 0 40px 40px 40px;
   color: white;
   text-align: center;
 }
@@ -931,7 +930,6 @@ select {
   align-items: center;
 }
 
-
 .admin-header h1 {
   font-size: 2.4rem;
   margin-bottom: 5px;
@@ -943,6 +941,7 @@ select {
 }
 
 .admin-stats {
+  padding: 0 40px 40px 40px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
@@ -963,17 +962,19 @@ select {
 }
 
 .admin-graph-placeholder {
-  margin-top: 40px;
+  margin: 40px;
   padding: 40px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px dashed rgba(255, 255, 255, 0.2);
   text-align: center;
+
 }
 
 .graph-placeholder-text {
   margin-top: 10px;
   opacity: 0.7;
+
 }
 
 .admin-future {
@@ -1000,9 +1001,10 @@ select {
 }
 
 .header-admin .header-inner {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
+
 
 .assistance-page .section + .section {
   padding-top: 20px;
