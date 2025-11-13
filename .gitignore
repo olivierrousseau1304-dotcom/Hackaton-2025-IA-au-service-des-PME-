@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+
+# SQLite
+*.db
+
+# Virtual env
+.env
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Byte-compiled / optimized
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
