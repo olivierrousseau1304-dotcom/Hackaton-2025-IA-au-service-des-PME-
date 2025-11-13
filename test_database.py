@@ -9,7 +9,7 @@ DB_NAME = 'support_client.db'
 def test_database():
     """Test la connexion et affiche quelques données"""
     
-    print("🔍 Test de la base de données...\n")
+    print(" Test de la base de données...\n")
     
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -18,7 +18,7 @@ def test_database():
     cursor.execute('SELECT ticket_id, subject, status, confidence_score FROM tickets LIMIT 3')
     tickets = cursor.fetchall()
     
-    print("📋 Les 3 premiers tickets :")
+    print("Les 3 premiers tickets :")
     for ticket in tickets:
         print(f"  • {ticket[0]} : {ticket[1]}")
         print(f"    Status: {ticket[2]} | Confiance: {ticket[3]}")
@@ -34,7 +34,7 @@ def test_database():
     
     stats = cursor.fetchone()
     
-    print(f"\n📊 Stats :")
+    print(f"\n Stats :")
     print(f"  • Total : {stats[0]} tickets")
     print(f"  • Auto-résolus : {stats[1]}")
     print(f"  • Taux automatisation : {stats[1]/stats[0]*100:.1f}%")
@@ -42,7 +42,7 @@ def test_database():
     
     conn.close()
     
-    print("\n✅ Base de données fonctionne correctement !")
+    print("\n Base de données fonctionne correctement !")
 
 if __name__ == "__main__":
     test_database()

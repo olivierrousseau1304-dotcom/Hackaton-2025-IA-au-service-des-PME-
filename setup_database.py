@@ -112,7 +112,7 @@ def create_schema(conn):
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_tickets_category ON tickets(category)')
     
     conn.commit()
-    print("✓ Schéma de base de données créé")
+    print("Schéma de base de données créé")
 
 # ============================================
 # INSERTION DES CLIENTS
@@ -164,7 +164,7 @@ def insert_clients(conn):
     ''', clients_data)
     
     conn.commit()
-    print(f"✓ {len(clients_data)} clients insérés")
+    print(f"{len(clients_data)} clients insérés")
 
 # ============================================
 # INSERTION DES RÉSOLUTIONS
@@ -210,7 +210,7 @@ def insert_resolutions(conn):
     ''', resolutions)
     
     conn.commit()
-    print(f"✓ {len(resolutions)} résolutions insérées")
+    print(f"{len(resolutions)} résolutions insérées")
 
 # ============================================
 # INSERTION DES TICKETS (depuis JSON)
@@ -234,7 +234,7 @@ def insert_tickets_from_json(conn, json_file='tickets.json'):
             continue
 
     if tickets is None:
-        print(f"⚠️ Aucun fichier trouvé ({', '.join(tried)}). Création de tickets de démo...")
+        print(f"Aucun fichier trouvé ({', '.join(tried)}). Création de tickets de démo...")
         tickets = create_demo_tickets()
     
     cursor = conn.cursor()
@@ -277,7 +277,7 @@ def insert_tickets_from_json(conn, json_file='tickets.json'):
         ))
     
     conn.commit()
-    print(f"✓ {len(tickets)} tickets insérés")
+    print(f"{len(tickets)} tickets insérés")
     
     # Mettre à jour les compteurs clients
     update_client_counts(conn)
@@ -325,7 +325,7 @@ def update_client_counts(conn):
     ''')
     
     conn.commit()
-    print("✓ Compteurs clients mis à jour")
+    print("Compteurs clients mis à jour")
 
 # ============================================
 # STATISTIQUES
@@ -336,7 +336,7 @@ def display_stats(conn):
     cursor = conn.cursor()
     
     print("\n" + "="*60)
-    print("📊 STATISTIQUES DE LA BASE DE DONNÉES")
+    print("STATISTIQUES DE LA BASE DE DONNÉES")
     print("="*60)
     
     # Stats globales
@@ -355,13 +355,13 @@ def display_stats(conn):
     
     automation_rate = (auto_resolved / total * 100) if total > 0 else 0
     
-    print(f"\n📈 Vue d'ensemble:")
+    print(f"\n Vue d'ensemble:")
     print(f"  • Total tickets: {total}")
     print(f"  • Auto-résolvables: {auto_resolvable} ({auto_resolvable/total*100:.1f}%)")
     print(f"  • Auto-résolus: {auto_resolved}")
     print(f"  • Score confiance moyen: {avg_conf:.2f}")
     print(f"  • Tickets escaladés: {escalated}")
-    print(f"  • 🎯 Taux d'automatisation: {automation_rate:.1f}%")
+    print(f"  •  Taux d'automatisation: {automation_rate:.1f}%")
     
     # Stats par canal
     cursor.execute('''
@@ -371,7 +371,7 @@ def display_stats(conn):
         GROUP BY channel
     ''')
     
-    print(f"\n📱 Par canal:")
+    print(f"\n Par canal:")
     for row in cursor.fetchall():
         channel, total_ch, auto = row
         print(f"  • {channel}: {total_ch} tickets ({auto} auto-résolus)")
@@ -386,7 +386,7 @@ def display_stats(conn):
         LIMIT 5
     ''')
     
-    print(f"\n🏷️ Top 5 catégories:")
+    print(f"\n Top 5 catégories:")
     for i, row in enumerate(cursor.fetchall(), 1):
         category, count = row
         print(f"  {i}. {category}: {count} tickets")
@@ -398,7 +398,7 @@ def display_stats(conn):
     cursor.execute('SELECT COUNT(*) FROM clients')
     total_clients = cursor.fetchone()[0]
     
-    print(f"\n👥 Clients:")
+    print(f"\n Clients:")
     print(f"  • Total: {total_clients}")
     print(f"  • Actifs: {active_clients}")
     
@@ -408,31 +408,7 @@ def display_stats(conn):
 # REQUÊTES UTILES
 # ============================================
 
-def query_examples(conn):
-    """Exemples de requêtes pour l'API"""
-    cursor = conn.cursor()
-    
-    print("\n💡 Exemples de requêtes SQL pour votre API:\n")
-    
-    # Derniers tickets
-    print("# Récupérer les 5 derniers tickets:")
-    print("""
-    SELECT ticket_id, subject, category, status, confidence_score 
-    FROM tickets 
-    ORDER BY created_at DESC 
-    LIMIT 5
-    """)
-    
-    # Stats temps réel
-    print("\n# Stats temps réel pour le dashboard:")
-    print("""
-    SELECT 
-        COUNT(*) as total,
-        SUM(CASE WHEN status = 'auto_resolved' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as automation_rate,
-        AVG(confidence_score) as avg_confidence
-    FROM tickets
-    WHERE date(created_at) = date('now')
-    """)
+# (Requêtes exemples supprimées — elles n'appartiennent pas au script de création de la base)
 
 # ============================================
 # MAIN
@@ -441,11 +417,11 @@ def query_examples(conn):
 def main():
     """Fonction principale - Setup complet"""
     print("\n" + "="*60)
-    print("🚀 SETUP SQLITE - SUPPORT CLIENT IA")
+    print(" SETUP SQLITE - SUPPORT CLIENT IA")
     print("="*60 + "\n")
     
     # Connexion
-    print(f"📁 Création de la base: {DB_FILE}")
+    print(f" Création de la base: {DB_FILE}")
     conn = sqlite3.connect(DB_FILE)
     
     try:
@@ -457,15 +433,14 @@ def main():
         
         # Stats
         display_stats(conn)
-        query_examples(conn)
         
-        print(f"\n✅ Setup terminé avec succès!")
-        print(f"📂 Base de données créée: {DB_FILE}")
-        print(f"💾 Taille: {conn.execute('SELECT page_count * page_size as size FROM pragma_page_count(), pragma_page_size()').fetchone()[0] / 1024:.1f} KB")
-        print(f"\n🔗 Partage simplement le fichier '{DB_FILE}' avec ton équipe!")
+        print(f"\n Setup terminé avec succès!")
+        print(f" Base de données créée: {DB_FILE}")
+        print(f" Taille: {conn.execute('SELECT page_count * page_size as size FROM pragma_page_count(), pragma_page_size()').fetchone()[0] / 1024:.1f} KB")
+        print(f"\n Partage simplement le fichier '{DB_FILE}' avec ton équipe!")
         
     except Exception as e:
-        print(f"\n❌ Erreur: {e}")
+        print(f"\n Erreur: {e}")
         conn.rollback()
         raise
     
