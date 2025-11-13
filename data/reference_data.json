@@ -1,0 +1,297 @@
+{
+  "printer_models": [
+    {
+      "manufacturer": "Lexmark",
+      "model_name": "C750",
+      "model_code": "C750",
+      "specifications": {
+        "type": "imprimante laser couleur",
+        "technology": "laser",
+        "max_pages_per_month": 75000,
+        "memory_base": "64MB",
+        "connectivity": ["USB", "Ethernet", "Parallèle"],
+        "supported_os": ["Windows 98/Me", "Windows 2000", "Windows XP"]
+      },
+      "manual_url": "https://www.lexmark.com/content/dam/lexmark/documents/user-guides/lexmark-c750.pdf"
+    }
+  ],
+  "knowledge_base": [
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Le panneau de commandes n'affiche rien ou uniquement des losanges",
+      "problem_description": "Écran vide ou affichage de caractères étranges (losanges) sur le panneau de commandes de l'imprimante",
+      "cause": "L'autotest de l'imprimante a échoué",
+      "solution": "Mettez l'imprimante hors tension, patientez environ 10 secondes, puis remettez-la sous tension. Le message 'Autotest à mise sous tension' doit s'afficher à l'écran. Une fois ce test terminé, le message 'Prêt' doit s'afficher. Sinon, mettez l'imprimante hors tension et contactez le service technique.",
+      "solution_steps": [
+        "Éteindre l'imprimante",
+        "Attendre 10 secondes",
+        "Rallumer l'imprimante",
+        "Vérifier que 'Autotest à mise sous tension' s'affiche",
+        "Attendre que 'Prêt' s'affiche",
+        "Si échec: contacter le service technique"
+      ],
+      "error_codes": [],
+      "tags": ["panneau_commandes", "affichage", "autotest", "écran"],
+      "source": "Manuel Lexmark C750 - Dépannage p.1"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux ne s'impriment pas",
+      "problem_description": "Les documents envoyés à l'imprimante ne sont pas imprimés",
+      "cause": "L'imprimante n'est pas prête à recevoir des données",
+      "solution": "Assurez-vous que le message 'Prêt' ou 'Economie énergie' s'affiche à l'écran avant de lancer une impression. Appuyez sur Reprise pour revenir à l'état Prêt.",
+      "solution_steps": [
+        "Vérifier l'écran de l'imprimante",
+        "Attendre l'affichage de 'Prêt' ou 'Economie énergie'",
+        "Si nécessaire, appuyer sur le bouton Reprise",
+        "Relancer l'impression"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "prêt", "reprise"],
+      "source": "Manuel Lexmark C750 - Dépannage p.1"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux ne s'impriment pas - Réceptacle plein",
+      "problem_description": "Les documents ne s'impriment pas car le bac de sortie est plein",
+      "cause": "Le réceptacle spécifié est plein",
+      "solution": "Retirez la pile de papier du réceptacle de sortie, puis appuyez sur Reprise.",
+      "solution_steps": [
+        "Retirer la pile de papier du réceptacle de sortie",
+        "Appuyer sur le bouton Reprise"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "réceptacle", "bac_sortie", "plein"],
+      "source": "Manuel Lexmark C750 - Dépannage p.1"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux ne s'impriment pas - Tiroir vide",
+      "problem_description": "Les documents ne s'impriment pas car le tiroir est vide",
+      "cause": "Le tiroir spécifié est vide",
+      "solution": "Chargez du papier dans ce tiroir. Pour obtenir des instructions détaillées, reportez-vous à la section Chargement des tiroirs du manuel.",
+      "solution_steps": [
+        "Identifier le tiroir vide",
+        "Charger du papier dans le tiroir",
+        "Consulter la section 'Chargement des tiroirs' si besoin"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "tiroir", "papier", "chargement"],
+      "source": "Manuel Lexmark C750 - Dépannage p.1"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux ne s'impriment pas - Pilote incorrect",
+      "problem_description": "Les documents ne s'impriment pas à cause d'un pilote incorrect ou impression dans un fichier",
+      "cause": "Vous utilisez un pilote d'imprimante incorrect ou vous imprimez dans un fichier",
+      "solution": "Vérifiez que le pilote d'imprimante sélectionné est associé à l'imprimante Lexmark C750. Si vous utilisez un port USB, assurez-vous que votre PC fonctionne sous Windows 98/Me ou Windows 2000, et que vous utilisez un pilote d'imprimante compatible avec ces systèmes d'exploitation.",
+      "solution_steps": [
+        "Vérifier le pilote d'imprimante sélectionné",
+        "S'assurer qu'il correspond à Lexmark C750",
+        "Si USB: vérifier Windows 98/Me ou Windows 2000",
+        "Installer le pilote compatible si nécessaire"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "pilote", "driver", "usb", "windows"],
+      "source": "Manuel Lexmark C750 - Dépannage p.2"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux ne s'impriment pas - Serveur MarkNet",
+      "problem_description": "Problème d'impression réseau avec le serveur MarkNet",
+      "cause": "Le serveur d'impression MarkNet n'est pas configuré ou connecté correctement",
+      "solution": "Vérifiez que vous avez correctement configuré l'imprimante pour l'impression réseau. Reportez-vous au CD Pilotes ou consultez le site Web de Lexmark pour plus d'informations.",
+      "solution_steps": [
+        "Vérifier la configuration réseau de l'imprimante",
+        "Consulter le CD Pilotes",
+        "Visiter le site Lexmark pour documentation",
+        "Reconfigurer MarkNet si nécessaire"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "réseau", "marknet", "configuration"],
+      "source": "Manuel Lexmark C750 - Dépannage p.2"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux ne s'impriment pas - Câble interface",
+      "problem_description": "Problème lié au câble d'interface",
+      "cause": "Vous n'utilisez pas le câble d'interface approprié ou ce dernier n'est pas correctement connecté",
+      "solution": "Assurez-vous d'utiliser le câble d'interface recommandé. Reportez-vous au Guide d'installation pour obtenir les spécifications relatives au câble.",
+      "solution_steps": [
+        "Vérifier le type de câble d'interface utilisé",
+        "S'assurer qu'il est bien connecté",
+        "Consulter le Guide d'installation",
+        "Remplacer par le câble recommandé si nécessaire"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "câble", "interface", "connexion"],
+      "source": "Manuel Lexmark C750 - Dépannage p.2"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux suspendus ne s'impriment pas",
+      "problem_description": "Les travaux en attente/suspendus ne s'impriment pas",
+      "cause": "Une erreur de mise en forme s'est produite ou la mémoire de l'imprimante est insuffisante",
+      "solution": "Imprimez le travail (le travail risque de ne pas s'imprimer complètement), supprimez le travail, ou libérez de la mémoire supplémentaire en supprimant des travaux dans la liste des tâches suspendues.",
+      "solution_steps": [
+        "Essayer d'imprimer le travail",
+        "Si échec: supprimer le travail problématique",
+        "Libérer de la mémoire en supprimant d'autres travaux suspendus",
+        "Relancer l'impression"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "travaux_suspendus", "mémoire", "formatage"],
+      "source": "Manuel Lexmark C750 - Dépannage p.3"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Données non valides reçues",
+      "problem_description": "L'imprimante a reçu des données non valides",
+      "cause": "L'imprimante a reçu des données non valides",
+      "solution": "Supprimez le travail.",
+      "solution_steps": [
+        "Annuler/supprimer le travail en cours",
+        "Vérifier le fichier source",
+        "Relancer l'impression avec un fichier correct"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "données", "erreur"],
+      "source": "Manuel Lexmark C750 - Dépannage p.3"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "L'impression d'un travail prend plus de temps que prévu",
+      "problem_description": "Les impressions sont anormalement lentes",
+      "cause": "Le travail est trop complexe",
+      "solution": "Pour réduire la complexité du travail, diminuez le nombre des polices et leur taille, le nombre et la complexité des images ainsi que le nombre de pages.",
+      "solution_steps": [
+        "Réduire le nombre de polices utilisées",
+        "Diminuer la taille des polices",
+        "Simplifier ou réduire les images",
+        "Diviser le document en plusieurs fichiers plus petits"
+      ],
+      "error_codes": [],
+      "tags": ["performance", "lenteur", "complexité"],
+      "source": "Manuel Lexmark C750 - Dépannage p.4"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Impression lente - Protection page activée",
+      "problem_description": "L'impression est lente à cause de la protection de page",
+      "cause": "Le paramètre Protection page est activé",
+      "solution": "Définissez Protection page sur Hors fonction depuis le Menu Config: 1) Appuyez sur Menu jusqu'à ce que le menu Config s'affiche, puis sur Sélectionner. 2) Appuyez sur Menu jusqu'à ce que Protection page s'affiche, puis sur Sélectionner. 3) Appuyez sur Menu jusqu'à ce que l'option Hors fonction s'affiche, puis sur Sélectionner.",
+      "solution_steps": [
+        "Appuyer sur Menu jusqu'à 'Config'",
+        "Appuyer sur Sélectionner",
+        "Naviguer jusqu'à 'Protection page'",
+        "Appuyer sur Sélectionner",
+        "Choisir 'Hors fonction'",
+        "Appuyer sur Sélectionner pour valider"
+      ],
+      "error_codes": [],
+      "tags": ["performance", "protection_page", "configuration"],
+      "source": "Manuel Lexmark C750 - Dépannage p.4"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Impression depuis mauvais tiroir ou mauvais support",
+      "problem_description": "Le travail est imprimé depuis un tiroir inapproprié ou sur un support inadéquat",
+      "cause": "Les paramètres du pilote d'imprimante prévalent sur ceux des menus du panneau de commandes",
+      "solution": "Assurez-vous que les paramètres Taille papier et Type papier définis dans le pilote d'imprimante sont adaptés au travail imprimé.",
+      "solution_steps": [
+        "Ouvrir les propriétés du pilote d'imprimante",
+        "Vérifier le paramètre 'Taille papier'",
+        "Vérifier le paramètre 'Type papier'",
+        "Ajuster selon le support utilisé",
+        "Relancer l'impression"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "tiroir", "papier", "support", "pilote"],
+      "source": "Manuel Lexmark C750 - Dépannage p.4"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Des caractères incorrects s'impriment",
+      "problem_description": "Caractères incorrects ou étranges imprimés sur les documents",
+      "cause": "Le câble parallèle utilisé n'est pas compatible",
+      "solution": "Si vous utilisez une interface parallèle, assurez-vous que le câble parallèle est conforme à la norme IEEE 1284. Nous vous recommandons le câble Lexmark réf. 1329605 (3 m) ou 1427498 (6 m) pour le port parallèle standard.",
+      "solution_steps": [
+        "Vérifier le type de câble parallèle utilisé",
+        "S'assurer de la conformité IEEE 1284",
+        "Remplacer par câble Lexmark 1329605 ou 1427498 si nécessaire"
+      ],
+      "error_codes": [],
+      "tags": ["impression", "caractères", "câble", "parallèle", "IEEE1284"],
+      "source": "Manuel Lexmark C750 - Dépannage p.5"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Mode Dépistage Hex actif",
+      "problem_description": "L'imprimante est bloquée en mode Dépistage Hex",
+      "cause": "L'imprimante est en mode Dépistage Hex",
+      "solution": "Si le message 'Prêt Hex' s'affiche à l'écran, vous devez quitter le mode Dépistage Hex avant d'imprimer. Mettez l'imprimante hors tension, puis remettez-la sous tension pour quitter le mode Dépistage Hex.",
+      "solution_steps": [
+        "Vérifier si 'Prêt Hex' s'affiche",
+        "Éteindre l'imprimante",
+        "Attendre quelques secondes",
+        "Rallumer l'imprimante",
+        "Vérifier que le mode normal est rétabli"
+      ],
+      "error_codes": [],
+      "tags": ["mode", "hex", "dépistage", "diagnostic"],
+      "source": "Manuel Lexmark C750 - Dépannage p.5"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "La fonction de chaînage des tiroirs ne fonctionne pas",
+      "problem_description": "Le basculement automatique entre tiroirs ne fonctionne pas",
+      "cause": "Le chaînage des tiroirs n'est pas configuré correctement",
+      "solution": "Pour configurer cette fonction: 1) Assurez-vous que la valeur de Type tiroir x de l'option Type papier du Menu Papier est identique pour tous les tiroirs concernés. 2) Assurez-vous que la valeur de Taille tiroir x de l'option Taille papier du Menu Papier est identique pour tous les tiroirs concernés.",
+      "solution_steps": [
+        "Accéder au Menu Papier",
+        "Vérifier 'Type papier' pour chaque tiroir",
+        "S'assurer que les types sont identiques",
+        "Vérifier 'Taille papier' pour chaque tiroir",
+        "S'assurer que les tailles sont identiques",
+        "Valider la configuration"
+      ],
+      "error_codes": [],
+      "tags": ["tiroirs", "chaînage", "configuration", "papier"],
+      "source": "Manuel Lexmark C750 - Dépannage p.5"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Les travaux volumineux ne sont pas assemblés",
+      "problem_description": "Les documents volumineux ne sont pas assemblés/triés correctement",
+      "cause": "Le paramètre Assemblage n'est pas activé ou la mémoire est insuffisante",
+      "solution": "Définissez Assemblage sur En fonction dans le Menu Finition ou depuis le pilote d'imprimante. Si le problème persiste, ajoutez de la mémoire à l'imprimante ou installez un disque dur optionnel.",
+      "solution_steps": [
+        "Activer 'Assemblage' dans le Menu Finition",
+        "Ou activer dans le pilote d'imprimante",
+        "Si échec: vérifier la mémoire disponible",
+        "Si nécessaire: ajouter de la mémoire RAM",
+        "Ou installer un disque dur optionnel"
+      ],
+      "error_codes": [],
+      "tags": ["assemblage", "tri", "mémoire", "finition"],
+      "source": "Manuel Lexmark C750 - Dépannage p.6"
+    },
+    {
+      "model": "Lexmark C750",
+      "problem_title": "Des sauts de page inattendus se produisent",
+      "problem_description": "L'imprimante insère des sauts de page non désirés",
+      "cause": "Le délai d'exécution du travail a expiré",
+      "solution": "Définissez Délai d'impr. sur une valeur plus élevée depuis le Menu Config.",
+      "solution_steps": [
+        "Accéder au Menu Config",
+        "Localiser 'Délai d'impr.'",
+        "Augmenter la valeur du délai",
+        "Valider le changement",
+        "Relancer l'impression"
+      ],
+      "error_codes": [],
+      "tags": ["sauts_page", "délai", "timeout", "configuration"],
+      "source": "Manuel Lexmark C750 - Dépannage p.6"
+    }
+  ]
+}
