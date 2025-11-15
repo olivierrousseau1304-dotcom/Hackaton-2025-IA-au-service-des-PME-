@@ -1,0 +1,101 @@
+{
+  "ticket_id": 12,
+  "author": "client",        // client | agent_ia | agent_humain
+  "channel": "sms",          // call | sms | email
+  "content": "Nouvelle info sur le problème...",
+  "source": "sms",           // optionnel
+  "from_address": "+336..."
+}
+
+
+####Function API####
+
+import logging
+import os
+import json
+
+import azure.functions as func
+import mysql.connector
+
+
+def _get_db_connection():
+    return mysql.connector.connect(
+        host=os.environ["MYSQL_HOST"],
+        database=os.environ["MYSQL_DB"],
+        user=os.environ["MYSQL_USER"],
+        password=os.environ["MYSQL_PASSWORD"],
+    )
+
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("append_message - Requête reçue.")
+
+    try:
+        body = req.get_json()
+    except ValueError:
+        return func.HttpResponse(
+            json.dumps({"error": "Invalid JSON body"}),
+            status_code=400,
+            mimetype="application/json",
+        )
+
+    ticket_id = body.get("ticket_id")
+    author = body.get("author") or "client"
+    channel = body.get("channel") or "call"
+    content = body.get("content")
+    source = body.get("source") or channel
+    from_address = body.get("from_address")
+
+    if not ticket_id or not content:
+        return func.HttpResponse(
+            json.dumps({"error": "Missing 'ticket_id' or 'content'"}),
+            status_code=400,
+            mimetype="application/json",
+        )
+
+    try:
+        conn = _get_db_connection()
+        cursor = conn.cursor()
+
+        # Si c’est un message client, on le stocke aussi dans inbound_messages
+        if author == "client":
+            cursor.execute(
+                """
+                INSERT INTO inbound_messages (ticket_id, source, external_message_id, from_address, content)
+                VALUES (%s, %s, %s, %s, %s);
+                """,
+                (ticket_id, source, None, from_address, content),
+            )
+
+        # Log du message dans la table messages
+        cursor.execute(
+            """
+            INSERT INTO messages (ticket_id, author, channel, content)
+            VALUES (%s, %s, %s, %s);
+            """,
+            (ticket_id, author, channel, content),
+        )
+
+        # Mettre à jour la date de mise à jour du ticket
+        cursor.execute(
+            "UPDATE tickets SET updated_at = CURRENT_TIMESTAMP WHERE id = %s;",
+            (ticket_id,),
+        )
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        return func.HttpResponse(
+            json.dumps({"success": True, "ticket_id": ticket_id}),
+            status_code=200,
+            mimetype="application/json",
+        )
+
+    except Exception as e:
+        logging.exception("Erreur dans append_message")
+        return func.HttpResponse(
+            json.dumps({"error": str(e)}),
+            status_code=500,
+            mimetype="application/json",
+        )
