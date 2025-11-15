@@ -11,3 +11,142 @@
   "from_address": "+33612345678",
   "initial_message": "Bonjour, mon imprimante est bloquée."
 }
+
+
+
+
+
+###########API###########
+
+
+import logging
+import os
+import json
+
+import azure.functions as func
+import mysql.connector
+
+
+def _get_db_connection():
+    return mysql.connector.connect(
+        host=os.environ["MYSQL_HOST"],
+        database=os.environ["MYSQL_DB"],
+        user=os.environ["MYSQL_USER"],
+        password=os.environ["MYSQL_PASSWORD"],
+    )
+
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("create_ticket - Requête reçue.")
+
+    try:
+        body = req.get_json()
+    except ValueError:
+        return func.HttpResponse(
+            json.dumps({"error": "Invalid JSON body"}),
+            status_code=400,
+            mimetype="application/json",
+        )
+
+    customer_id = body.get("customer_id")
+    phone = body.get("phone")
+    name = body.get("name")
+    email = body.get("email")
+    company_name = body.get("company_name")
+
+    device_id = body.get("device_id")
+    subject = body.get("subject") or "Problème imprimante"
+    problem_description = body.get("problem_description") or ""
+
+    channel = body.get("channel") or "call"
+    from_address = body.get("from_address") or phone or email
+    initial_message = body.get("initial_message") or problem_description
+
+    if not customer_id and not phone:
+        return func.HttpResponse(
+            json.dumps(
+                {"error": "Need 'customer_id' or at least 'phone' to create a ticket"}
+            ),
+            status_code=400,
+            mimetype="application/json",
+        )
+
+    try:
+        conn = _get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        # 1) Récupérer / créer le client
+        if not customer_id:
+            cursor.execute(
+                """
+                SELECT id
+                FROM customers
+                WHERE phone = %s OR external_id = %s
+                LIMIT 1;
+                """,
+                (phone, phone),
+            )
+            row = cursor.fetchone()
+            if row:
+                customer_id = row["id"]
+            else:
+                cursor.execute(
+                    """
+                    INSERT INTO customers (external_id, name, email, phone, company_name)
+                    VALUES (%s, %s, %s, %s, %s);
+                    """,
+                    (phone, name, email, phone, company_name),
+                )
+                conn.commit()
+                customer_id = cursor.lastrowid
+
+        # 2) Créer le ticket
+        cursor.execute(
+            """
+            INSERT INTO tickets (customer_id, device_id, status, priority, subject, problem_description)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            """,
+            (customer_id, device_id, "open", "normal", subject, problem_description),
+        )
+        ticket_id = cursor.lastrowid
+
+        # 3) Enregistrer le message initial (si présent)
+        if initial_message:
+            cursor.execute(
+                """
+                INSERT INTO inbound_messages (ticket_id, source, external_message_id, from_address, content)
+                VALUES (%s, %s, %s, %s, %s);
+                """,
+                (ticket_id, channel, None, from_address, initial_message),
+            )
+            cursor.execute(
+                """
+                INSERT INTO messages (ticket_id, author, channel, content)
+                VALUES (%s, %s, %s, %s);
+                """,
+                (ticket_id, "client", channel, initial_message),
+            )
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        response = {
+            "success": True,
+            "ticket_id": ticket_id,
+            "customer_id": customer_id,
+        }
+
+        return func.HttpResponse(
+            json.dumps(response, default=str),
+            status_code=201,
+            mimetype="application/json",
+        )
+
+    except Exception as e:
+        logging.exception("Erreur dans create_ticket")
+        return func.HttpResponse(
+            json.dumps({"error": str(e)}),
+            status_code=500,
+            mimetype="application/json",
+        )
