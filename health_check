@@ -1,0 +1,41 @@
+import logging
+import os
+import json
+
+import azure.functions as func
+import mysql.connector
+
+
+def _get_db_connection():
+    return mysql.connector.connect(
+        host=os.environ["MYSQL_HOST"],
+        database=os.environ["MYSQL_DB"],
+        user=os.environ["MYSQL_USER"],
+        password=os.environ["MYSQL_PASSWORD"],
+    )
+
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("health_check - Requête reçue.")
+
+    try:
+        conn = _get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1;")
+        _ = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        return func.HttpResponse(
+            json.dumps({"status": "ok"}),
+            status_code=200,
+            mimetype="application/json",
+        )
+
+    except Exception as e:
+        logging.exception("Erreur dans health_check")
+        return func.HttpResponse(
+            json.dumps({"status": "error", "error": str(e)}),
+            status_code=500,
+            mimetype="application/json",
+        )
