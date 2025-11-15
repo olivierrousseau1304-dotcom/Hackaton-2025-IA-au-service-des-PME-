@@ -1,0 +1,13 @@
+{
+  "customer_id": 1,          // facultatif
+  "phone": "0612345678",     // requis si pas de customer_id
+  "name": "Jean Martin",     // utilisé si on crée le client
+  "email": "jean@example.com",
+  "company_name": "AzurCompta",
+  "device_id": 2,
+  "subject": "Erreur papier",
+  "problem_description": "Mon imprimante affiche bourrage papier.",
+  "channel": "call",         // call | sms | email
+  "from_address": "+33612345678",
+  "initial_message": "Bonjour, mon imprimante est bloquée."
+}
